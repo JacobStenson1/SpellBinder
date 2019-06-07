@@ -10,13 +10,16 @@ public class PlayerActions : MonoBehaviour
     ParticleSystem firePointPS;
 
     public Animator animator;
+    public PlayerMovement playerMovement;
+    public Rigidbody2D rb;
 
-    bool canShoot = true;
+    public bool canShoot = true;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         firePointPS = firePoint.GetComponent<ParticleSystem>();
+
 
     }
 
@@ -24,15 +27,34 @@ public class PlayerActions : MonoBehaviour
     {
         if (Input.GetKeyDown("e"))
         {
-            if (canShoot)
-            {
-                canShoot = false;
+            CastSpell();
+        }
+        if (Input.GetKeyDown("q"))
+        {
+            Interact();
+        }
 
-                print("Shooting");
+    }
+
+    void CastSpell()
+    {
+        if (canShoot)
+        {
+            print("Shooting");
+
+            // If standing still
+            if (rb.velocity.x < 0.1 && rb.velocity.x > -0.1)
+            {
+                print("okay to");
                 firePointPS.Play();
                 animator.Play("Shoot");
             }
         }
+    }
+
+    void Interact()
+    {
+
     }
 
     void Shoot()
@@ -40,8 +62,8 @@ public class PlayerActions : MonoBehaviour
         Instantiate(fireballPrefab, firePoint.transform.position, firePoint.transform.rotation);
     }
 
-    void AfterShot()
+    void AfterShoot()
     {
-        canShoot = true;
+        playerMovement.canMove = true;
     }
 }

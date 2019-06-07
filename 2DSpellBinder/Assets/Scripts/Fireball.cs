@@ -10,11 +10,14 @@ public class Fireball : MonoBehaviour
 
     public Rigidbody2D rb;
     public CircleCollider2D collider;
+    public PlayerActions playerActions;
 
     // Start is called before the first frame update
     void Start()
     {
         rb.velocity = transform.right * speed;
         collider.enabled = true;
+        //playerActions = GameObject.Find("Tom").GetComponent<PlayerActions>();
+        //playerActions.canShoot = true;
     }
 }

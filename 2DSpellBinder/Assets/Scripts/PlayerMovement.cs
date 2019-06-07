@@ -6,12 +6,16 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController2D controller;
     public Animator animator;
+    public Rigidbody2D rb;
 
     public float runSpeed;
 
     float horizontalMove = 0f;
     bool doJump = false;
     bool doCrouch = false;
+
+    public bool canMove = true;
+
 
     // Update is called once per frame
     void Update()
@@ -21,8 +25,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            print("Yes");
+            print("Jump");
             doJump = true;
+        }
+
+        //Is the player moving left and right?
+        if(rb.velocity.x > 0.1 || rb.velocity.x < -0.1)
+        {
+            animator.Play("Walk");
         }
 
         //if (Input.GetButtonDown("Crouch"))
@@ -37,8 +47,11 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Move character
-        controller.Move(horizontalMove * Time.fixedDeltaTime, doCrouch, doJump);
-        doJump = false;
+        if (canMove)
+        {
+            //Move character
+            controller.Move(horizontalMove * Time.fixedDeltaTime, doCrouch, doJump);
+            doJump = false;
+        }
     }
 }
