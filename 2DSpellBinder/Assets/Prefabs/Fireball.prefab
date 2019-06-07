@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8937271229230261092}
   - component: {fileID: 1206446859742632972}
   - component: {fileID: 822349419606794950}
+  - component: {fileID: 670480832327454269}
   m_Layer: 0
   m_Name: Fireball
   m_TagString: Untagged
@@ -118,6 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   rb: {fileID: -6463279774132005829}
+  collider: {fileID: 670480832327454269}
 --- !u!198 &1206446859742632972
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4848,3 +4850,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!58 &670480832327454269
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3549490286810608987}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.10817067, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.97182935

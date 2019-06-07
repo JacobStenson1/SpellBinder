@@ -9,12 +9,12 @@ public class Fireball : MonoBehaviour
     public float speed;
 
     public Rigidbody2D rb;
+    public CircleCollider2D collider;
 
     // Start is called before the first frame update
     void Start()
     {
-        //rb = GetComponent<Rigidbody2D>();
-
         rb.velocity = transform.right * speed;
+        collider.enabled = true;
     }
 }

@@ -11,6 +11,8 @@ public class PlayerActions : MonoBehaviour
 
     public Animator animator;
 
+    bool canShoot = true;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -22,15 +24,24 @@ public class PlayerActions : MonoBehaviour
     {
         if (Input.GetKeyDown("e"))
         {
-            print("Shooting");
+            if (canShoot)
+            {
+                canShoot = false;
 
-            firePointPS.Play();
-            animator.Play("Shoot");
+                print("Shooting");
+                firePointPS.Play();
+                animator.Play("Shoot");
+            }
         }
     }
 
     void Shoot()
     {
         Instantiate(fireballPrefab, firePoint.transform.position, firePoint.transform.rotation);
+    }
+
+    void AfterShot()
+    {
+        canShoot = true;
     }
 }
