@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController2D controller;
     public Animator animator;
     public Rigidbody2D rb;
+    public PlayerActions playerActions;
 
     public float runSpeed;
 
@@ -32,7 +33,8 @@ public class PlayerMovement : MonoBehaviour
         //Is the player moving left and right?
         if(rb.velocity.x > 0.1 || rb.velocity.x < -0.1)
         {
-            animator.Play("Walk");
+            if(!playerActions.isCasting)
+                animator.Play("Walk");
         }
 
         //if (Input.GetButtonDown("Crouch"))

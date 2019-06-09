@@ -13,7 +13,10 @@ public class PlayerActions : MonoBehaviour
     public PlayerMovement playerMovement;
     public Rigidbody2D rb;
 
-    public bool canShoot = true;
+    public float timeBetweenShots;
+    public float startTimeBetweenShots;
+
+    public bool isCasting;
 
     private void Start()
     {
@@ -25,10 +28,19 @@ public class PlayerActions : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("e"))
+        if (timeBetweenShots <= 0)
         {
-            CastSpell();
+            isCasting = false;
+            if (Input.GetKeyDown("e"))
+            {
+                CastSpell();
+                timeBetweenShots = startTimeBetweenShots;
+            }
+        }else
+        {
+            timeBetweenShots -= Time.deltaTime;
         }
+        
         if (Input.GetKeyDown("q"))
         {
             Interact();
@@ -38,23 +50,15 @@ public class PlayerActions : MonoBehaviour
 
     void CastSpell()
     {
-        if (canShoot)
-        {
-            print("Shooting");
-
-            // If standing still
-            if (rb.velocity.x < 0.1 && rb.velocity.x > -0.1)
-            {
-                print("okay to");
-                firePointPS.Play();
-                animator.Play("Shoot");
-            }
-        }
+        print("Shooting");
+        isCasting = true;
+        firePointPS.Play();
+        animator.Play("Shoot");
     }
 
     void Interact()
     {
-
+        // Not implemented yet
     }
 
     void Shoot()
